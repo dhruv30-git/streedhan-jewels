@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streedhan Jewels — Ahmedabad | Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3EC;
+    --cream-deep:#F3E5D8;
+    --rose:#C98E7A;
+    --rose-deep:#B06B54;
+    --maroon:#7A3E2E;
+    --maroon-dark:#4A2117;
+    --line:#D9BBAC;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--maroon-dark);
+    font-family:'Jost',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .bg-texture{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, var(--cream-deep) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, var(--cream-deep) 0%, transparent 40%);
+    z-index:0;
+    pointer-events:none;
+  }
+
+  .frame{
+    position:fixed;
+    inset:22px;
+    border:1px solid var(--line);
+    z-index:1;
+    pointer-events:none;
+  }
+  .frame::before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border:0.5px solid var(--line);
+  }
+
+  .wrap{
+    position:relative;
+    z-index:2;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 24px 60px;
+  }
+
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    font-weight:400;
+    font-size:11px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    margin-bottom:36px;
+    opacity:0;
+    animation:fadeUp 0.9s ease forwards 0.1s;
+  }
+
+  .jhumka{
+    width:64px;
+    height:auto;
+    margin-bottom:30px;
+    transform-origin:50% 8%;
+    animation:swing 4.5s ease-in-out infinite, fadeUp 0.9s ease forwards 0.3s;
+    opacity:0;
+  }
+  .jhumka path, .jhumka circle, .jhumka line{
+    stroke:var(--rose-deep);
+  }
+
+  h1{
+    font-family:'Marcellus', serif;
+    font-weight:400;
+    font-size:clamp(48px, 9vw, 96px);
+    line-height:1;
+    margin:0;
+    letter-spacing:1px;
+    color:var(--maroon);
+    opacity:0;
+    animation:fadeUp 1s ease forwards 0.5s;
+  }
+
+  .sub{
+    font-family:'Jost', sans-serif;
+    font-size:13px;
+    letter-spacing:9px;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    margin:16px 0 0;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 0.7s;
+  }
+
+  .rule{
+    width:60px;
+    height:1px;
+    background:var(--rose);
+    margin:34px auto;
+    opacity:0;
+    animation:growLine 1s ease forwards 0.9s;
+  }
+
+  .quote{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(20px, 3vw, 28px);
+    color:var(--maroon);
+    max-width:560px;
+    line-height:1.5;
+    margin:0 0 8px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.05s;
+  }
+  .quote-meaning{
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    letter-spacing:2px;
+    color:var(--rose-deep);
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.2s;
+  }
+
+  .coming-soon{
+    font-family:'Marcellus', serif;
+    font-size:clamp(22px, 3.4vw, 30px);
+    letter-spacing:3px;
+    color:var(--maroon-dark);
+    margin:56px 0 28px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.4s;
+  }
+
+  form{
+    display:flex;
+    gap:0;
+    width:100%;
+    max-width:400px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.6s;
+    border:1px solid var(--rose-deep);
+  }
+  input[type="email"]{
+    flex:1;
+    border:none;
+    background:transparent;
+    padding:14px 18px;
+    font-family:'Jost', sans-serif;
+    font-size:13px;
+    color:var(--maroon-dark);
+    outline:none;
+    letter-spacing:0.5px;
+  }
+  input[type="email"]::placeholder{
+    color:#BFA093;
+  }
+  button{
+    border:none;
+    background:var(--maroon);
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    padding:0 26px;
+    cursor:pointer;
+    transition:background 0.25s ease;
+    white-space:nowrap;
+  }
+  button:hover{
+    background:var(--rose-deep);
+  }
+
+  .note{
+    font-size:11px;
+    letter-spacing:1px;
+    color:#A9836F;
+    margin-top:18px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.75s;
+  }
+
+  .footer{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding-bottom:40px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.9s;
+  }
+  .socials{
+    display:flex;
+    gap:22px;
+  }
+  .socials a{
+    color:var(--rose-deep);
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease;
+  }
+  .socials a:hover{
+    border-color:var(--rose-deep);
+  }
+  .location{
+    font-size:10px;
+    letter-spacing:2px;
+    color:#BFA093;
+    text-transform:uppercase;
+  }
+
+  .success-msg{
+    display:none;
+    font-family:'Jost', sans-serif;
+    font-size:12px;
+    letter-spacing:1px;
+    color:var(--maroon);
+    margin-top:18px;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes growLine{
+    from{opacity:0; width:0;}
+    to{opacity:1; width:60px;}
+  }
+  @keyframes swing{
+    0%,100%{transform:rotate(-6deg);}
+    50%{transform:rotate(6deg);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .jhumka{animation:fadeUp 0.9s ease forwards 0.3s !important;}
+    *{animation-duration:0.01ms !important;}
+  }
+
+  @media (max-width:480px){
+    form{flex-direction:column;}
+    button{padding:14px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-texture"></div>
+<div class="frame"></div>
+
+<div class="wrap">
+  <svg class="jhumka" viewBox="0 0 64 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M32 4 Q17 4 17 22 Q17 36 32 36 Q47 36 47 22 Q47 4 32 4" stroke-width="1.6"/>
+    <circle cx="32" cy="20" r="4" fill="var(--rose-deep)"/>
+    <path d="M20 36 L44 36 L50 52 L14 52 Z" fill="var(--rose-deep)" fill-opacity="0.9" stroke="none"/>
+    <line x1="32" y1="52" x2="32" y2="78" stroke-width="1.4"/>
+    <circle cx="32" cy="86" r="9" stroke-width="1.4"/>
+    <circle cx="14" cy="60" r="3" fill="var(--rose-deep)" stroke="none"/>
+    <circle cx="50" cy="60" r="3" fill="var(--rose-deep)" stroke="none"/>
+  </svg>
+
+  <h1>Streedhan</h1>
+  <p class="sub">Jewels</p>
+
+  <div class="rule"></div>
+
+  <p class="quote">"Not just gold. Her gold."</p>
+  <p class="quote-meaning">Streedhan — a woman's own, forever</p>
+
+  <p class="coming-soon">Opening soon</p>
+
+  <div class="footer">
+    <p class="location">Traditional gold &amp; silver jewelry · Ahmedabad, Gujarat</p>
+  </div>
+</div>
+
+</body>
+</html>
