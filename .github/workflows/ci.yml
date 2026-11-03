@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: docker build -t streedhan-site:ci .
+
+      - name: Start the container
+        run: docker run -d --name site -p 8080:8080 streedhan-site:ci
+
+      - name: Smoke test
+        run: |
+          sleep 3
+          curl -fsS -I http://localhost:8080 | tee headers.txt
+          grep -qi "x-content-type-options: nosniff" headers.txt
+          if grep -qi "server: nginx/[0-9]" headers.txt; then
+            echo "Nginx version is exposed"; exit 1
+          fi
